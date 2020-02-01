@@ -40,16 +40,24 @@ namespace JpUtil
         {
             if (IsEditor)
             {
+#if UNITY_EDITOR
+                if (Input.GetKeyDown(KeyCode.Space)){ return TouchInfo.Began; }
+                if (Input.GetKey(KeyCode.Space))    { return TouchInfo.Moved; }
+                if (Input.GetKeyUp(KeyCode.Space))  { return TouchInfo.Ended; }
+                
                 if (Input.GetMouseButtonDown(0)) { return TouchInfo.Began; }
                 if (Input.GetMouseButton(0))     { return TouchInfo.Moved; }
                 if (Input.GetMouseButtonUp(0))   { return TouchInfo.Ended; }
+#endif                
             }
             else
             {
+#if !UNITY_EDITOR                
                 if (Input.touchCount > 0)
                 {
                     return (TouchInfo)((int)Input.GetTouch(0).phase);
                 } 
+#endif                
             }
             return TouchInfo.None;
         }
@@ -62,11 +70,14 @@ namespace JpUtil
         {
             if (IsEditor)
             {
+#if UNITY_EDITOR                
                 TouchInfo touch = JpUtil.Touch.GetTouch();
                 if (touch != TouchInfo.None) { return Input.mousePosition; }
+#endif
             }
             else
             {
+#if !UNITY_EDITOR
                 if (Input.touchCount > 0)
                 {
                     var touch = Input.GetTouch(0);
@@ -74,6 +85,7 @@ namespace JpUtil
                     TouchPosition.y = touch.position.y;
                     return TouchPosition;
                 }
+#endif                
             }
             return Vector3.zero;
         }
