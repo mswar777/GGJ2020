@@ -6,7 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     float velocity;
     bool IsTouch { get; set; }
+    bool IsEndTouch { get; set; }
     int touch_counter;
+    int jump_trigger;
+    float floor_height;
+
+    void Awake()
+    {
+        touch_counter = 0;
+        velocity = 0;
+        floor_height = transform.localPosition.y;
+        jump_trigger = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -14,13 +25,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    void FixedUpdate()
     {
+        IsTouch = false;
+        IsEndTouch = false;
         var info = JpUtil.Touch.GetTouch();
-        if (info == JpUtil.TouchInfo.None)
-            IsTouch = false;
-        else
+        if (info != JpUtil.TouchInfo.None)
             IsTouch = true;
+        if (info != JpUtil.TouchInfo.Ended)
+            IsEndTouch = true;
 
         switch (GameState.Instance.State)
         {
@@ -36,36 +50,43 @@ public class PlayerController : MonoBehaviour
     // ゲーム通常時
     void Update_GameNormal()
     {
-        if (IsTouch && touch_counter < 60)
+        var pos = transform.localPosition;
+
+        if (IsTouch && (touch_counter < 30))
         {
-            velocity = 10;
+            if (touch_counter == 0)
+                jump_trigger = 1;
+            velocity = 40;
             touch_counter++;
         }
 
-        var pos = transform.localPosition;
-        pos.y += velocity;
-        transform.localPosition = pos;
-        if (transform.localPosition.y > 0)
+        if (jump_trigger > 0 && pos.y >= floor_height)
         {
-            velocity -= 0.2f;
+            velocity -= 4.0f;
+Debug.Log("OnJump : pos " + pos.y);            
         }
         else
         {
             // 着地
             touch_counter = 0;
+            jump_trigger = 0;
 
+            velocity = 0;
             pos.y = 0;
             transform.localPosition = pos;
-
-            Landing();
+Debug.Log("OnLanding : pos " + pos.y);
+            OnLanding();
         }
+
+        pos.y += velocity;
+        transform.localPosition = pos;
     }
 
     // 着地時
-    void Landing()
+    void OnLanding()
     {
         var param = GameState.Instance.PlayerParam;
-        param.StaminaLoss(1);
+        param.StaminaLoss(5);
 
         if (param.Stamina <= 0)
         {
