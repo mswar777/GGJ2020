@@ -5,16 +5,23 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     float velocity;
+    bool IsTouch { get; set; }
+    int touch_counter;
 
     // Start is called before the first frame update
     void Start()
     {
-        velocity = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
+        var info = JpUtil.Touch.GetTouch();
+        if (info == JpUtil.TouchInfo.None)
+            IsTouch = false;
+        else
+            IsTouch = true;
+
         switch (GameState.Instance.State)
         {
             case GameState.GameStateType.Normal:
@@ -29,6 +36,12 @@ public class PlayerController : MonoBehaviour
     // ゲーム通常時
     void Update_GameNormal()
     {
+        if (IsTouch && touch_counter < 60)
+        {
+            velocity = 10;
+            touch_counter++;
+        }
+
         var pos = transform.localPosition;
         pos.y += velocity;
         transform.localPosition = pos;
@@ -39,9 +52,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             // 着地
+            touch_counter = 0;
+
             pos.y = 0;
             transform.localPosition = pos;
-            velocity = 10;
 
             Landing();
         }
