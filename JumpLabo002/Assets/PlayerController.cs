@@ -52,6 +52,12 @@ public class PlayerController : MonoBehaviour
     {
         var param = GameState.Instance.PlayerParam;
         param.StaminaLoss(1);
+
+        if (param.Stamina <= 0)
+        {
+            // スタミナなくなったー！回復モードへ
+            GameState.Instance.State = GameState.GameStateType.Repair;
+        }
     }
 
     // 天使の矢ステート
@@ -60,5 +66,11 @@ public class PlayerController : MonoBehaviour
         // 回復
         var param = GameState.Instance.PlayerParam;
         param.StaminaRepair(1);
+
+        if (param.Stamina >= GameState.PlayerParametter.StaminaMax)
+        {
+            // 通常モードへ
+            GameState.Instance.State = GameState.GameStateType.Normal;
+        }
     }
 }

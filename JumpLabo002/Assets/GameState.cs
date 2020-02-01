@@ -60,21 +60,4 @@ public class GameState
         }
     }
     public PlayerParametter PlayerParam = new PlayerParametter();
-
-    void Awake()
-    {
-        //Param.Reset();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 // Title メインシーケンス
 public class SequenceTitle : MonoBehaviour
 {
+    void Awake()
+    {
+        GameState.Instance.SceneNow = GameState.SceneType.Title;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
