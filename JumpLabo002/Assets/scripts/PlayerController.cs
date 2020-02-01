@@ -10,6 +10,16 @@ public class PlayerController : MonoBehaviour
     int _touch_counter;
     int _landing_counter;
     float _floor_height;
+    SpriteRenderer _sprite;
+
+    [SerializeField]
+    private Sprite SpriteWait;
+    [SerializeField]
+    private Sprite SpriteJump;
+    [SerializeField]
+    private Sprite SpriteFall;
+    [SerializeField]
+    private Sprite SpriteLanding;
 
     void Awake()
     {
@@ -17,6 +27,9 @@ public class PlayerController : MonoBehaviour
         _velocity = 0;
         _floor_height = transform.localPosition.y;
         _landing_counter = 0;
+        
+        _sprite = GetComponent<SpriteRenderer>();
+        _sprite.sprite = SpriteWait;
     }
 
     // Start is called before the first frame update
@@ -52,14 +65,15 @@ public class PlayerController : MonoBehaviour
     {
         var pos = transform.localPosition;
         
-        if (_landing_counter == 0 && _touch_counter < 30)
+        if (_landing_counter == 0 && _touch_counter < 20)
         {
             if (IsTouch)
             {
                 _velocity = 40;
                 _touch_counter++;
+                _sprite.sprite = SpriteJump;
             }
-            else if (_touch_counter > 0)
+            else
             {
                 _landing_counter = 3;
             }
@@ -73,21 +87,19 @@ public class PlayerController : MonoBehaviour
             }
             else if (_landing_counter > 0)
             {
+                _landing_counter--;
                 _velocity = 0;
+                if (_sprite.sprite != SpriteLanding)
+                    _sprite.sprite = SpriteLanding;
+            }
+            else
+            {
+                // 着地
+                _landing_counter = 0;
+                _touch_counter = 0;
 
-                if (_landing_counter > 0)
-                {
-                    _landing_counter--;
-                }
-                else 
-                {
-                    // 着地
-                    _landing_counter = 0;
-                    _touch_counter = 0;
-
-                    Debug.Log("OnLanding : pos " + pos.y);
-                    OnLanding();
-                }
+                Debug.Log("OnLanding : pos " + pos.y);
+                OnLanding();
             }
         }
 

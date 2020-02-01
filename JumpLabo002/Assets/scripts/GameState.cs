@@ -39,7 +39,7 @@ public class GameState
         public const int StaminaMax = 100;
         public int Stamina { get; private set; }
 
-        void Reset()
+        public void Reset()
         {
             Stamina = StaminaMax;
         }

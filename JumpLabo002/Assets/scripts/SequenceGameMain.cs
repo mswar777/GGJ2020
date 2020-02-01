@@ -7,6 +7,7 @@ public class SequenceGameMain : MonoBehaviour
     void Awake()
     {
         GameState.Instance.SceneNow = GameState.SceneType.Game01;
+        GameState.Instance.PlayerParam.Reset();
     }
 
     // Start is called before the first frame update

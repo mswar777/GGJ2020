@@ -49,3 +49,6 @@ TagManager:
   - name: moon
     uniqueID: 4170244939
     locked: 0
+  - name: character
+    uniqueID: 3192563047
+    locked: 0
