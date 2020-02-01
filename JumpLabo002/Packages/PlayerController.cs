@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     float velocity;
-    public int stamina = 100;
+    Slider _slider;
+    int stamina = 100;
 
     // Start is called before the first frame update
     void Start()
     {
         velocity = 10;
+        _slider = GameObject.Find("Slider").GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
                 Update_GameRepair();
                 break;
         }
+        _slider.value = stamina;
     }
 
     // ゲーム通常時
@@ -40,9 +44,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             // 着地
-            pos.y = 0.0f;
+            pos.y = 0;
             transform.localPosition = pos;
             velocity = 10;
+            stamina -= 10;
 
             Landing();
         }
@@ -53,7 +58,6 @@ public class PlayerController : MonoBehaviour
     {
         var param = GameState.Instance.PlayerParam;
         param.StaminaLoss(1);
-        stamina -= 10;
 
         if (param.Stamina <= 0)
         {
