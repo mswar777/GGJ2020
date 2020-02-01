@@ -4,37 +4,30 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float velocity;
-<<<<<<< HEAD
-    public int stamina = 100;
-=======
+    float _velocity;
     bool IsTouch { get; set; }
     bool IsEndTouch { get; set; }
-    int touch_counter;
-    int jump_trigger;
-    float floor_height;
+    int _touch_counter;
+    int _landing_counter;
+    float _floor_height;
 
     void Awake()
     {
-        touch_counter = 0;
-        velocity = 0;
-        floor_height = transform.localPosition.y;
-        jump_trigger = 0;
+        _touch_counter = 0;
+        _velocity = 0;
+        _floor_height = transform.localPosition.y;
+        _landing_counter = 0;
     }
->>>>>>> d8356f979b53e8471367f268468959b56735efde
 
     // Start is called before the first frame update
     void Start()
     {
-        velocity = 10;
     }
 
     // Update is called once per frame
     //void Update()
     void FixedUpdate()
     {
-<<<<<<< HEAD
-=======
         IsTouch = false;
         IsEndTouch = false;
         var info = JpUtil.Touch.GetTouch();
@@ -43,7 +36,6 @@ public class PlayerController : MonoBehaviour
         if (info != JpUtil.TouchInfo.Ended)
             IsEndTouch = true;
 
->>>>>>> d8356f979b53e8471367f268468959b56735efde
         switch (GameState.Instance.State)
         {
             case GameState.GameStateType.Normal:
@@ -59,48 +51,49 @@ public class PlayerController : MonoBehaviour
     void Update_GameNormal()
     {
         var pos = transform.localPosition;
-<<<<<<< HEAD
-        pos.y += velocity;
-        transform.localPosition = pos;
-        if (transform.localPosition.y > 0)
-=======
-
-        if (IsTouch && (touch_counter < 30))
+        
+        if (_landing_counter == 0 && _touch_counter < 30)
         {
-            if (touch_counter == 0)
-                jump_trigger = 1;
-            velocity = 40;
-            touch_counter++;
-        }
-
-        if (jump_trigger > 0 && pos.y >= floor_height)
->>>>>>> d8356f979b53e8471367f268468959b56735efde
-        {
-            velocity -= 4.0f;
-Debug.Log("OnJump : pos " + pos.y);            
+            if (IsTouch)
+            {
+                _velocity = 40;
+                _touch_counter++;
+            }
+            else if (_touch_counter > 0)
+            {
+                _landing_counter = 3;
+            }
         }
         else
         {
-            // 着地
-<<<<<<< HEAD
-            pos.y = 0.0f;
-            transform.localPosition = pos;
-            velocity = 10;
+            if (pos.y > _floor_height)
+            {
+                _velocity -= 4.0f;
+                //Debug.Log("OnJump : pos " + pos.y);            
+            }
+            else if (_landing_counter > 0)
+            {
+                _velocity = 0;
 
-            Landing();
-=======
-            touch_counter = 0;
-            jump_trigger = 0;
+                if (_landing_counter > 0)
+                {
+                    _landing_counter--;
+                }
+                else 
+                {
+                    // 着地
+                    _landing_counter = 0;
+                    _touch_counter = 0;
 
-            velocity = 0;
-            pos.y = 0;
-            transform.localPosition = pos;
-Debug.Log("OnLanding : pos " + pos.y);
-            OnLanding();
->>>>>>> d8356f979b53e8471367f268468959b56735efde
+                    Debug.Log("OnLanding : pos " + pos.y);
+                    OnLanding();
+                }
+            }
         }
 
-        pos.y += velocity;
+        pos.y += _velocity;
+        if (pos.y < 0)
+            pos.y = 0;
         transform.localPosition = pos;
     }
 
@@ -108,12 +101,7 @@ Debug.Log("OnLanding : pos " + pos.y);
     void OnLanding()
     {
         var param = GameState.Instance.PlayerParam;
-<<<<<<< HEAD
-        param.StaminaLoss(1);
-        stamina -= 10;
-=======
         param.StaminaLoss(5);
->>>>>>> d8356f979b53e8471367f268468959b56735efde
 
         if (param.Stamina <= 0)
         {
