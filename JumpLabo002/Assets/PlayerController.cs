@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    class PlayerParametter
-
-    {
-        public const int stamina_max = 100;
-        public int stamina;
-        void Reset()
-        {
-            stamina = stamina_max;
-        }
-    }
-
-    PlayerParametter param = new PlayerParametter();
     float velocity;
 
     // Start is called before the first frame update
@@ -26,6 +14,20 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        switch (GameState.Instance.State)
+        {
+            case GameState.GameStateType.Normal:
+                Update_GameNormal();
+                break;
+            case GameState.GameStateType.Repair:
+                Update_GameRepair();
+                break;
+        }
+    }
+
+    // ゲーム通常時
+    void Update_GameNormal()
     {
         var pos = transform.localPosition;
         pos.y += velocity;
@@ -48,6 +50,15 @@ public class PlayerController : MonoBehaviour
     // 着地時
     void Landing()
     {
-        param.stamina -= 1;
+        var param = GameState.Instance.PlayerParam;
+        param.StaminaLoss(1);
+    }
+
+    // 天使の矢ステート
+    void Update_GameRepair()
+    {
+        // 回復
+        var param = GameState.Instance.PlayerParam;
+        param.StaminaRepair(1);
     }
 }
