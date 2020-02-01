@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 794016105}
   - component: {fileID: 794016106}
   m_Layer: 0
-  m_Name: bg
+  m_Name: BgPicture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5492,7 +5492,7 @@ GameObject:
   - component: {fileID: 1497575272}
   - component: {fileID: 1497575271}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5537,8 +5537,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: eccd0afd9cdfb4f1f821b658f4d34df0, type: 3}
-  m_Color: {r: 0.5377358, g: 0.2797547, b: 0.18009079, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 71fa7230bc14b407a82054ad4764c352, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5556,8 +5556,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497575270}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 540, y: 120, z: 0}
-  m_LocalScale: {x: 1400, y: 1000, z: 1}
+  m_LocalPosition: {x: 540, y: -300, z: 0}
+  m_LocalScale: {x: 80, y: 80, z: 1}
   m_Children: []
   m_Father: {fileID: 1547648427}
   m_RootOrder: 0
@@ -5586,7 +5586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521286075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540, y: 800, z: 0}
+  m_LocalPosition: {x: 540, y: 600, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1759775841}
