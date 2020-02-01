@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Hiza : MonoBehaviour
 {
-    public PlayerController playerController; 
+    //public PlayerController playerController; 
     Slider _slider;
 
     // Start is called before the first frame update
     void Start()
     {
         //_slider = GameObject.Find("Slider").GetComponent<Slider>();        
-        _slider = this.GetComponent<Slider>();
+        _slider = transform.Find("Slider").GetComponent<Slider>();
     }
   
     // Update is called once per frame
