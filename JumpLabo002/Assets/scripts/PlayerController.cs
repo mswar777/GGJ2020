@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float velocity;
-    public int stamina = 100;
+    float _velocity;
+    bool IsTouch { get; set; }
+    bool IsEndTouch { get; set; }
+    int _touch_counter;
+    int _landing_counter;
+    float _floor_height;
+
+    void Awake()
+    {
+        _touch_counter = 0;
+        _velocity = 0;
+        _floor_height = transform.localPosition.y;
+        _landing_counter = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        velocity = 10;
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    void FixedUpdate()
     {
+        IsTouch = false;
+        IsEndTouch = false;
+        var info = JpUtil.Touch.GetTouch();
+        if (info != JpUtil.TouchInfo.None)
+            IsTouch = true;
+        if (info != JpUtil.TouchInfo.Ended)
+            IsEndTouch = true;
+
         switch (GameState.Instance.State)
         {
             case GameState.GameStateType.Normal:
@@ -31,29 +51,57 @@ public class PlayerController : MonoBehaviour
     void Update_GameNormal()
     {
         var pos = transform.localPosition;
-        pos.y += velocity;
-        transform.localPosition = pos;
-        if (transform.localPosition.y > 0)
+        
+        if (_landing_counter == 0 && _touch_counter < 30)
         {
-            velocity -= 0.2f;
+            if (IsTouch)
+            {
+                _velocity = 40;
+                _touch_counter++;
+            }
+            else if (_touch_counter > 0)
+            {
+                _landing_counter = 3;
+            }
         }
         else
         {
-            // 着地
-            pos.y = 0.0f;
-            transform.localPosition = pos;
-            velocity = 10;
+            if (pos.y > _floor_height)
+            {
+                _velocity -= 4.0f;
+                //Debug.Log("OnJump : pos " + pos.y);            
+            }
+            else if (_landing_counter > 0)
+            {
+                _velocity = 0;
 
-            Landing();
+                if (_landing_counter > 0)
+                {
+                    _landing_counter--;
+                }
+                else 
+                {
+                    // 着地
+                    _landing_counter = 0;
+                    _touch_counter = 0;
+
+                    Debug.Log("OnLanding : pos " + pos.y);
+                    OnLanding();
+                }
+            }
         }
+
+        pos.y += _velocity;
+        if (pos.y < 0)
+            pos.y = 0;
+        transform.localPosition = pos;
     }
 
     // 着地時
-    void Landing()
+    void OnLanding()
     {
         var param = GameState.Instance.PlayerParam;
-        param.StaminaLoss(1);
-        stamina -= 10;
+        param.StaminaLoss(5);
 
         if (param.Stamina <= 0)
         {

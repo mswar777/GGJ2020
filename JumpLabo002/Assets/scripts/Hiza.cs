@@ -11,14 +11,14 @@ public class Hiza : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _slider = GameObject.Find("Slider").GetComponent<Slider>();        
+        //_slider = GameObject.Find("Slider").GetComponent<Slider>();        
+        _slider = this.GetComponent<Slider>();
     }
   
     // Update is called once per frame
     void Update()
     {
-        int stm;
-        stm = playerController.stamina;
-        _slider.value = stm;
+        var param = GameState.Instance.PlayerParam;
+        _slider.value = param.Stamina;
     }
 }
