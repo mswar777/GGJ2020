@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     float _velocity;
+    public float Velocity { get { return _velocity; } }
     bool IsTouch { get; set; }
     bool IsEndTouch { get; set; }
     public bool IsFalling { get; private set; }

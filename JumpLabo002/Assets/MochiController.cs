@@ -20,6 +20,8 @@ public class MochiController : MonoBehaviour
 
     int death_counter;
 
+    bool _is_hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,34 +32,43 @@ public class MochiController : MonoBehaviour
     void FixedUpdate()
     {
         var pos = transform.localPosition;
+        float relative_h = pos.y - HitTarget.transform.localPosition.y;
+        relative_h = relative_h >= 0 ? relative_h : -relative_h;
 
-        if (death_counter > 40)
+        var player = HitTarget.GetComponent<PlayerController>();
+
+        if (death_counter > 30)
         {
-            Destroy(this.gameObject, 0.1f);
+            Destroy(this.gameObject);
             return;
         }
-        if (Velocity == 0)
+        else if (_is_hit)
         {
+            // ヒット後・・・
             death_counter++;
+            // プレイヤー足下へ
+            pos.y = HitTarget.transform.localPosition.y - 50;
         }
-
-        // プレイヤーが上の時
-        var player = HitTarget.GetComponent<PlayerController>();
-        if (player.IsFalling && HitTarget.transform.position.y > pos.y)
+        else
         {
-            // 矩形でヒットチェック
-            float relative_h = pos.y - HitTarget.transform.position.y;
-            relative_h = relative_h >= 0 ? relative_h : -relative_h; 
-            if (pos.x < HitRadius &&
-                pos.x > -HitRadius &&
-                relative_h < HitHeight)
-            {                
-                // Hit!
-                Debug.Log("Hit! " + transform.name);
-                GetComponent<SpriteRenderer>().sprite = SpriteFall;
-                Velocity = 0;
-                // プレイヤー足下へ
-                pos.y = HitTarget.transform.position.y - relative_h;
+            // プレイヤーが上の時
+            if (player.Velocity < 0 && HitTarget.transform.localPosition.y > pos.y)
+            {
+                // 矩形でヒットチェック
+                if (pos.x < HitRadius &&
+                    pos.x > -HitRadius &&
+                    relative_h < HitHeight)
+                {                
+                    // Hit!
+                    Debug.Log("Hit! " + transform.name);
+                    _is_hit = true;
+                    GetComponent<SpriteRenderer>().sprite = SpriteFall;
+                    Velocity = 0;
+                    death_counter = 0;
+
+                    // プレイヤー足下へ
+                    pos.y = HitTarget.transform.localPosition.y - 50;
+                }
             }
         }
 
