@@ -60,4 +60,42 @@ public class GameState
         }
     }
     public PlayerParametter PlayerParam = new PlayerParametter();
+
+    public class StageParametter
+    {
+        public float StartHeight = -200;
+        public float WinHeight = 600;
+
+        public float LoseHeight = -500;
+
+        public float FloorHeight { get; private set; }
+
+
+        public void Reset()
+        {
+            FloorHeight = StartHeight;
+        }
+
+        public void AddFloorHeight(float n)
+        {
+            FloorHeight += n;
+            if (FloorHeight > WinHeight)
+                FloorHeight = WinHeight;
+            if (FloorHeight < LoseHeight)
+                FloorHeight = LoseHeight;
+        }
+
+        public bool IsWin
+        {
+            get { return FloorHeight >= WinHeight; }
+        }
+
+        public bool IsLose
+        {
+            get { return FloorHeight <= LoseHeight; }
+        }
+
+    }
+
+    public StageParametter StageParam = new StageParametter();
 }

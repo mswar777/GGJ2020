@@ -141,6 +141,8 @@ public class PlayerController : MonoBehaviour
         // 着地音
         audioSource.PlayOneShot(landing);
 
+        GameState.Instance.StageParam.AddFloorHeight(25);
+
         if (param.Stamina <= 0)
         {
             // スタミナなくなったー！回復モードへ
