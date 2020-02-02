@@ -65,6 +65,7 @@ public class MochiController : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = SpriteFall;
                     Velocity = 0;
                     death_counter = 0;
+                    player.HitMochi = true;
 
                     // プレイヤー足下へ
                     pos.y = HitTarget.transform.localPosition.y - 50;

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SequenceGameMain : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject RepairObject;
+
     void Awake()
     {
         GameState.Instance.SceneNow = GameState.SceneType.Game01;
@@ -28,6 +31,18 @@ public class SequenceGameMain : MonoBehaviour
         if (GameState.Instance.StageParam.IsLose)
         {
             SceneManager.LoadScene("GameOverScene");
+        }
+
+        // 回復中〜
+        if (GameState.Instance.State == GameState.GameStateType.Repair)
+        {
+            if (RepairObject.activeSelf == false)
+                RepairObject.SetActive(true);
+        }
+        else
+        {
+            if (RepairObject.activeSelf)
+                RepairObject.SetActive(false);
         }
     }
 }

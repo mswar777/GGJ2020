@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     bool IsEndTouch { get; set; }
     public bool IsFalling { get; private set; }
     public bool IsJamping { get; private set; }
+    public bool HitMochi { get; set; }
 
     int _touch_counter;
     int _landing_counter;
@@ -137,7 +138,10 @@ public class PlayerController : MonoBehaviour
     void OnLanding()
     {
         var param = GameState.Instance.PlayerParam;
-        param.StaminaLoss(5);
+        if (HitMochi == false)
+            param.StaminaLoss(5);
+        HitMochi = false;
+
         // 着地音
         audioSource.PlayOneShot(landing);
 
