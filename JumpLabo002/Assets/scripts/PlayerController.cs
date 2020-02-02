@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         var pos = transform.localPosition;
         
-        if (_landing_counter == 0 && _touch_counter < 20)
+        if (_landing_counter == 0 && _touch_counter < 30)
         {
             if (IsTouch)
             {

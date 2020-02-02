@@ -21,7 +21,7 @@ public class BgMoving : MonoBehaviour
     {
         if (up_scale)
         {
-            scale += 0.00006f;
+            scale += 0.0002f;
             if (scale > 1.03f)
             {
                 scale = 1.03f;
@@ -30,7 +30,7 @@ public class BgMoving : MonoBehaviour
         }
         else
         {
-            scale -= 0.00006f;
+            scale -= 0.0002f;
             if (scale < 1.00f)
             {
                 scale = 1.00f;
@@ -40,5 +40,6 @@ public class BgMoving : MonoBehaviour
         var tmpScale = transform.localScale;
         tmpScale = original_scale * scale;
         transform.localScale = tmpScale;
+        //transform.rotation = new Vector3(0, 0, scale * 10);
     }
 }
