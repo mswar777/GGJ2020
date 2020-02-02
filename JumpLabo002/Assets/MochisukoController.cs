@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MochisukoController : MonoBehaviour
 {
-    const float speed = 1.0f;
+    public float Speed = 5.0f;
     float velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        velocity = -speed;
+        velocity = -Speed;
     }
 
     // Update is called once per frame
@@ -26,13 +26,13 @@ public class MochisukoController : MonoBehaviour
         if (pos.x < -500)
         {
             sprite.flipX = true;
-            velocity = speed;
+            velocity = Speed;
             OnTurn();
         }
         else if (pos.x > 500)
         {
             sprite.flipX = false;
-            velocity = -speed;
+            velocity = -Speed;
             OnTurn();
         }
 

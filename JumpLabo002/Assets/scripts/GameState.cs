@@ -36,7 +36,7 @@ public class GameState
     public class PlayerParametter
 
     {
-        public const int StaminaMax = 100;
+        public const int StaminaMax = 1000;
         public int Stamina { get; private set; }
 
         public void Reset()

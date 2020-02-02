@@ -138,14 +138,15 @@ public class PlayerController : MonoBehaviour
     void OnLanding()
     {
         var param = GameState.Instance.PlayerParam;
-        if (HitMochi == false)
-            param.StaminaLoss(5);
+        if (HitMochi)
+            GameState.Instance.StageParam.AddFloorHeight(25);
+        else
+            param.StaminaLoss(200);
+
         HitMochi = false;
 
         // 着地音
         audioSource.PlayOneShot(landing);
-
-        GameState.Instance.StageParam.AddFloorHeight(25);
 
         if (param.Stamina <= 0)
         {
@@ -159,7 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         // 回復
         var param = GameState.Instance.PlayerParam;
-        param.StaminaRepair(1);
+        param.StaminaRepair(5);
 
         if (param.Stamina >= GameState.PlayerParametter.StaminaMax)
         {

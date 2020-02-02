@@ -548,10 +548,10 @@ MonoBehaviour:
   HitTarget: {fileID: 1759775840}
   MinY: 0
   MaxY: 400
-  SpawnSpan: 4
+  SpawnSpan: 0.6
   ScreenX: 700
-  SpeedMin: 4
-  SpeedMax: 12
+  SpeedMin: 20
+  SpeedMax: 40
 --- !u!1 &580479867
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +860,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.49999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725803379017444016, guid: 65d7da05004d0194a8e50d9f107a715d,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725803379017444016, guid: 65d7da05004d0194a8e50d9f107a715d,
+        type: 3}
+      propertyPath: m_Value
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6725803379648174970, guid: 65d7da05004d0194a8e50d9f107a715d,
         type: 3}
@@ -1499,6 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afa84c0cd80044b1986c7478ee7bcf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 3
 --- !u!1 &1321711690
 GameObject:
   m_ObjectHideFlags: 0
