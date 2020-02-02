@@ -550,8 +550,8 @@ MonoBehaviour:
   MaxY: 800
   SpawnSpan: 0.6
   ScreenX: 700
-  SpeedMin: 20
-  SpeedMax: 40
+  SpeedMin: 10
+  SpeedMax: 50
 --- !u!1 &580479867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,7 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afa84c0cd80044b1986c7478ee7bcf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 6
 --- !u!1 &1321711690
 GameObject:
   m_ObjectHideFlags: 0
@@ -6748,6 +6748,8 @@ MonoBehaviour:
   SpriteLanding: {fileID: 21300000, guid: d0c7175d2a616aa4e8c239223ea15fbb, type: 3}
   jumping: {fileID: 8300000, guid: a3033778fb98a8343aa1e5a1d9b79c41, type: 3}
   landing: {fileID: 8300000, guid: be89167898bd6ee44a7e58551bb2c888, type: 3}
+  StaminaDamageAmount: 250
+  StaminaRepairAmount: 4
 --- !u!95 &1759775844
 Animator:
   serializedVersion: 3
@@ -6778,8 +6780,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip landing;
     AudioSource audioSource;
 
+    public int StaminaDamageAmount = 200;
+    public int StaminaRepairAmount = 5;
+
     void Awake()
     {
         _touch_counter = 0;
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
         if (HitMochi)
             GameState.Instance.StageParam.AddFloorHeight(100);
         else
-            param.StaminaLoss(100);
+            param.StaminaLoss(StaminaDamageAmount);
 
         HitMochi = false;
 
@@ -160,7 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         // 回復
         var param = GameState.Instance.PlayerParam;
-        param.StaminaRepair(3);
+        param.StaminaRepair(StaminaRepairAmount);
 
         if (param.Stamina >= GameState.PlayerParametter.StaminaMax)
         {
