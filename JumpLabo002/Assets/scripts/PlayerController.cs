@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Sprite SpriteLanding;
 
+    public AudioClip jumping;
+    public AudioClip landing;
+    AudioSource audioSource;
+
     void Awake()
     {
         _touch_counter = 0;
@@ -34,6 +38,8 @@ public class PlayerController : MonoBehaviour
         
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.sprite = SpriteWait;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -76,6 +82,11 @@ public class PlayerController : MonoBehaviour
             {
                 _velocity = 40;
                 _touch_counter++;
+                if (_touch_counter == 1)
+                {
+                    // ジャンプ音
+                    audioSource.PlayOneShot(jumping);
+                }
                 _sprite.sprite = SpriteJump;
             }
             else if (_velocity > 0)
@@ -127,6 +138,8 @@ public class PlayerController : MonoBehaviour
     {
         var param = GameState.Instance.PlayerParam;
         param.StaminaLoss(5);
+        // 着地音
+        audioSource.PlayOneShot(landing);
 
         if (param.Stamina <= 0)
         {
