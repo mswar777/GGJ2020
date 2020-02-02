@@ -27,14 +27,21 @@ public class MochisukoController : MonoBehaviour
         {
             sprite.flipX = true;
             velocity = speed;
+            OnTurn();
         }
         else if (pos.x > 500)
         {
             sprite.flipX = false;
             velocity = -speed;
+            OnTurn();
         }
 
         pos.x += velocity;
         transform.localPosition = pos;
+    }
+
+    void OnTurn()
+    {
+        GameState.Instance.StageParam.AddFloorHeight(-100);
     }
 }
