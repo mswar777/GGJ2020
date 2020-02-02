@@ -1085,12 +1085,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0500d18cdeff6b1438206b9b562cb4ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  moveableRange: 5.5
-  power: 300
+  power: 40000
   Arrow: {fileID: 7727443178135802414, guid: 324a8d93fe5d7e145b8220d6eb0c84ef, type: 3}
   spawnPoint: {fileID: 868119306}
-  moveRange: 2
+  jumpPower: 40000
 --- !u!4 &868119306
 Transform:
   m_ObjectHideFlags: 0
@@ -1099,8 +1097,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868119304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -499.57703, y: -1116.8605, z: 613.75757}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -693, y: 1455, z: 613.75757}
+  m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 1117208453}
   m_RootOrder: 1
@@ -1327,8 +1325,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103911961}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -493.55167, y: -1115.5717, z: 624.8596}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 545, y: 1600, z: 624.8596}
+  m_LocalScale: {x: 150, y: 150, z: 1}
   m_Children: []
   m_Father: {fileID: 1117208453}
   m_RootOrder: 3
@@ -1367,7 +1365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1117208453
 Transform:
   m_ObjectHideFlags: 0
@@ -1511,6 +1509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321711692}
   - component: {fileID: 1321711691}
+  - component: {fileID: 1321711693}
   m_Layer: 0
   m_Name: angel
   m_TagString: Untagged
@@ -1576,12 +1575,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321711690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -493.58704, y: -1115.8805, z: 624.8596}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 545, y: 1600, z: 624.8596}
+  m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 1117208453}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1321711693
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321711690}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2c5d68de90b15e419c56e9e16f5d0ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1349061999
 GameObject:
   m_ObjectHideFlags: 0
@@ -6366,12 +6384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e879375b4eadb20449ccbf05e1bd1c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  moveableRange: 5.5
-  power: 300
+  power: 40000
   Arrow: {fileID: 8925705218714574415, guid: 07c6f1e7538a1774d99e583c3653b899, type: 3}
   spawnPoint: {fileID: 1404548976}
-  moveRange: 3
+  jumpPower: 40000
 --- !u!4 &1404548976
 Transform:
   m_ObjectHideFlags: 0
@@ -6380,8 +6396,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404548974}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -487.99503, y: -1118.7705, z: 613.75757}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 1761, y: 1152, z: 613.75757}
+  m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 1117208453}
   m_RootOrder: 0

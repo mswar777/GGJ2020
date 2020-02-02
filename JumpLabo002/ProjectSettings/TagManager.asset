@@ -6,6 +6,9 @@ TagManager:
   tags:
   - moti
   - yumiya
+  - SceneChange
+  - Sound
+  - AngelGround
   layers:
   - Default
   - TransparentFX
