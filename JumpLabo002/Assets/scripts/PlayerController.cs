@@ -139,9 +139,9 @@ public class PlayerController : MonoBehaviour
     {
         var param = GameState.Instance.PlayerParam;
         if (HitMochi)
-            GameState.Instance.StageParam.AddFloorHeight(25);
+            GameState.Instance.StageParam.AddFloorHeight(50);
         else
-            param.StaminaLoss(200);
+            param.StaminaLoss(100);
 
         HitMochi = false;
 
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         // 回復
         var param = GameState.Instance.PlayerParam;
-        param.StaminaRepair(5);
+        param.StaminaRepair(3);
 
         if (param.Stamina >= GameState.PlayerParametter.StaminaMax)
         {

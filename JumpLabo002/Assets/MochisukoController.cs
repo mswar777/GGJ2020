@@ -42,6 +42,6 @@ public class MochisukoController : MonoBehaviour
 
     void OnTurn()
     {
-        GameState.Instance.StageParam.AddFloorHeight(-100);
+        GameState.Instance.StageParam.AddFloorHeight(-200);
     }
 }

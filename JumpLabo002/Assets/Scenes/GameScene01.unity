@@ -547,7 +547,7 @@ MonoBehaviour:
     type: 3}
   HitTarget: {fileID: 1759775840}
   MinY: 0
-  MaxY: 400
+  MaxY: 800
   SpawnSpan: 0.6
   ScreenX: 700
   SpeedMin: 20

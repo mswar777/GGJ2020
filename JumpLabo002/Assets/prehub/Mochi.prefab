@@ -99,5 +99,5 @@ MonoBehaviour:
   HitTarget: {fileID: 0}
   Velocity: 5
   StartPosition: {x: 0, y: 0}
-  HitRadius: 300
+  HitRadius: 240
   HitHeight: 600
