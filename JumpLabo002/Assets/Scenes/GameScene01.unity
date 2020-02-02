@@ -409,9 +409,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MochiPrefab: {fileID: 2454189799187819504, guid: 8a2c55cf89aa94e3e914a009cf247f1d,
     type: 3}
+  HitTarget: {fileID: 1759775840}
   MinY: 0
   MaxY: 400
   SpawnSpan: 4
+  ScreenX: 700
+  SpeedMin: 4
+  SpeedMax: 12
 --- !u!1 &580479867
 GameObject:
   m_ObjectHideFlags: 0

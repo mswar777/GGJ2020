@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     float _velocity;
     bool IsTouch { get; set; }
     bool IsEndTouch { get; set; }
+    public bool IsFalling { get; private set; }
+    public bool IsJamping { get; private set; }
+
     int _touch_counter;
     int _landing_counter;
     float _floor_height;
@@ -65,41 +68,50 @@ public class PlayerController : MonoBehaviour
     {
         var pos = transform.localPosition;
         
-        if (_landing_counter == 0 && _touch_counter < 30)
+        if (IsJamping == false && 
+            _landing_counter == 0)
         {
-            if (IsTouch)
+            if (IsTouch && _touch_counter < 30)
             {
                 _velocity = 40;
                 _touch_counter++;
                 _sprite.sprite = SpriteJump;
             }
-            else
+            else if (_velocity > 0)
             {
+                IsJamping = true;
                 _landing_counter = 3;
             }
         }
-        else
+        else if (IsJamping == true && 
+                _landing_counter > 0)
         {
             if (pos.y > _floor_height)
             {
                 _velocity -= 4.0f;
                 //Debug.Log("OnJump : pos " + pos.y);            
-            }
-            else if (_landing_counter > 0)
-            {
-                _landing_counter--;
-                _velocity = 0;
-                if (_sprite.sprite != SpriteLanding)
-                    _sprite.sprite = SpriteLanding;
+                IsFalling = true;
             }
             else
             {
-                // 着地
-                _landing_counter = 0;
-                _touch_counter = 0;
+                _landing_counter--;
 
-                Debug.Log("OnLanding : pos " + pos.y);
-                OnLanding();
+                // 接地したばかり
+                _velocity = 0;
+                IsFalling = false;
+                if (_sprite.sprite != SpriteLanding)
+                    _sprite.sprite = SpriteLanding;
+
+                // 着地
+                if (_landing_counter <= 0)
+                {
+                    IsJamping = false;
+                    _landing_counter = 0;
+                    _touch_counter = 0;
+
+                    Debug.Log("OnLanding : pos " + pos.y);
+                    OnLanding();
+                }
             }
         }
 

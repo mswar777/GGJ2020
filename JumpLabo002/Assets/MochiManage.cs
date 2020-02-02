@@ -6,6 +6,8 @@ public class MochiManage : MonoBehaviour
 {
     [SerializeField]
     GameObject MochiPrefab;
+    [SerializeField]
+    GameObject HitTarget;
 
     public float MinY = 0;
     public float MaxY = 400;
@@ -40,6 +42,9 @@ public class MochiManage : MonoBehaviour
         // Manageの下に作るよ
         mochi.transform.SetParent(this.transform);
         var controller = mochi.GetComponent<MochiController>();
+        controller.HitTarget = HitTarget;
+
+        // ランダム位置
         controller.StartPosition.y = Random.Range(MinY, MaxY);
         controller.Velocity = Random.Range(SpeedMin, SpeedMax);
         if (Random.Range(0.0f, 1.0f) > 0.5f)
